@@ -12,7 +12,7 @@ ENV TEMP_PATH     /temp/jira
 # 2. 将需要的文件上传到临时文件
 # To Ready JIRA
 RUN mkdir /temp && mkdir /temp/jira
-COPY atlassian-extras-3.2.jar                    /temp/jira/atlassian-extras-3.2.jar
+COPY ./lib/atlassian-extras-3.2.jar                    /temp/jira/atlassian-extras-3.2.jar
 
 
 # Install Atlassian JIRA and helper tools and setup initial home
