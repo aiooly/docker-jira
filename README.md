@@ -22,7 +22,7 @@ create database jira_db character set utf8 collate utf8_bin;
 ### 启动JIRA 
 
 ```
-docker run --name jira -p 8080:8080 daocloud.io/marcus_li/docker-jira:latest
+docker run --name jira - -p 8080:8080 daocloud.io/marcus_li/docker-jira:latest
 ```
 
 访问 http://localhost:8080 选择手动配置，配置本地数据库，生成试用秘钥（官方秘钥）
