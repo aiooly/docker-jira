@@ -3,7 +3,7 @@ FROM openjdk:8-alpine
 # Configuration variables.
 ENV JIRA_HOME     /var/atlassian/jira
 ENV JIRA_INSTALL  /opt/atlassian/jira
-ENV JIRA_VERSION  7.9.2
+ENV JIRA_VERSION  7.3.8
 
 # 定义临时文件夹，用于存放上传的文件
 ENV TEMP_PATH     /temp/jira
