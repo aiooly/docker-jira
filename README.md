@@ -1,1 +1,1 @@
-"# docker-jira" 
+# build jira docker  image
