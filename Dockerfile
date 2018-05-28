@@ -5,6 +5,16 @@ ENV JIRA_HOME     /var/atlassian/jira
 ENV JIRA_INSTALL  /opt/atlassian/jira
 ENV JIRA_VERSION  7.9.2
 
+# 定义临时文件夹，用于存放上传的文件
+ENV TEMP_PATH     /temp/jira
+# 准备JIRA的安装工作
+# 1. 创建/temp/jira临时目录
+# 2. 将需要的文件上传到临时文件
+# To Ready JIRA
+RUN mkdir /temp && mkdir /temp/jira
+COPY atlassian-extras-3.2.jar                    /temp/jira/atlassian-extras-3.2.jar
+
+
 # Install Atlassian JIRA and helper tools and setup initial home
 # directory structure.
 RUN set -x \
@@ -29,6 +39,12 @@ RUN set -x \
     && sed --in-place          "s/java version/openjdk version/g" "${JIRA_INSTALL}/bin/check-java.sh" \
     && echo -e                 "\njira.home=$JIRA_HOME" >> "${JIRA_INSTALL}/atlassian-jira/WEB-INF/classes/jira-application.properties" \
     && touch -d "@0"           "${JIRA_INSTALL}/conf/server.xml"
+
+# 使用补丁包替换掉原来的JAR包
+# Hack
+RUN set -x \
+    && rm -rf                  "${JIRA_INSTALL}/atlassian-jira/WEB-INF/lib/atlassian-extras-3.2.jar" \
+    && cp                      "${TEMP_PATH}/atlassian-extras-3.2.jar" "${JIRA_INSTALL}/atlassian-jira/WEB-INF/lib/atlassian-extras-3.2.jar"
 
 # Use the default unprivileged account. This could be considered bad practice
 # on systems where multiple processes end up being executed by 'daemon' but
