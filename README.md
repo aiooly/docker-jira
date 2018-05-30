@@ -6,7 +6,7 @@
 可以拉取公共的images
 
 ```
-docker pull daocloud.io/marcus_li/docker-jira:latest
+docker pull daocloud.io/marcus_li/jira:latest
 ```
 
 ### 启动数据库
