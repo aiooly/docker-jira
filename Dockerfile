@@ -15,6 +15,13 @@ RUN mkdir /temp && mkdir /temp/jira
 COPY ./lib/atlassian-extras-3.2.jar                    /temp/jira/atlassian-extras-3.2.jar
 
 
+RUN  echo 'http://mirrors.ustc.edu.cn/alpine/v3.5/main' > /etc/apk/repositories \
+    && echo 'http://mirrors.ustc.edu.cn/alpine/v3.5/community' >>/etc/apk/repositories \
+&& apk update && apk add tzdata \
+&& ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \ 
+&& echo "Asia/Shanghai" > /etc/timezone
+
+
 # Install Atlassian JIRA and helper tools and setup initial home
 # directory structure.
 RUN set -x \
